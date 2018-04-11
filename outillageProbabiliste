@@ -1,0 +1,42 @@
+var personnes = [
+	{
+		"nom": "Jerome Lestoquoy",
+		"nombreDeFoisPrésentateur": 2
+	},
+	{
+		"nom": "Rémi Boussu",
+		"nombreDeFoisPrésentateur": 2
+	},
+	{
+		"nom": "Geoffrey Gourlez",
+		"nombreDeFoisPrésentateur": 2
+	},
+	{
+		"nom": "Remy Bourdoncle",
+		"nombreDeFoisPrésentateur": 1
+	}
+];
+
+function réductionParAddition(accumulator, element)
+{
+	return accumulator + element;
+}
+
+function réductionParMultiplication(accumulator, element)
+{
+	return accumulator * element;
+}
+
+var passages = personnes.map((element) => element.nombreDeFoisPrésentateur);
+var totalMultiplié = passages.reduce(réductionParMultiplication);
+var passagesProbas = passages.map((element) => totalMultiplié/element);
+var totalRange = passagesProbas.reduce(réductionParAddition);
+var resultMapping = passagesProbas.map((element) => element/totalRange);
+
+/* 
+    resultMapping contient un tableau de probabilitées comprises entre 0 et 1 équitablement 
+    réparties selon le nombre de fois qu'une personne est passée en présentateur 
+    examples : 
+    [2, 2, 2, 1] => [ 0.2, 0.2, 0.2, 0.4 ]
+    [4, 3, 2, 1] => [ 0.12, 0.16, 0.24, 0.48 ]
+*/
