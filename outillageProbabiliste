@@ -17,14 +17,14 @@ var personnes = [
 	}
 ];
 
-function réductionParAddition(accumulator, element)
+function réductionParAddition(accumulateur, element)
 {
-	return accumulator + element;
+	return accumulateur + element;
 }
 
-function réductionParMultiplication(accumulator, element)
+function réductionParMultiplication(accumulateur, element)
 {
-	return accumulator * element;
+	return accumulateur * element;
 }
 
 var passages = personnes.map((element) => element.nombreDeFoisPrésentateur);
@@ -33,10 +33,21 @@ var passagesProbas = passages.map((element) => totalMultiplié/element);
 var totalRange = passagesProbas.reduce(réductionParAddition);
 var resultMapping = passagesProbas.map((element) => element/totalRange);
 
-/* 
-    resultMapping contient un tableau de probabilitées comprises entre 0 et 1 équitablement 
-    réparties selon le nombre de fois qu'une personne est passée en présentateur 
-    examples : 
-    [2, 2, 2, 1] => [ 0.2, 0.2, 0.2, 0.4 ]
-    [4, 3, 2, 1] => [ 0.12, 0.16, 0.24, 0.48 ]
-*/
+/* ResultMapping contient un tableau de probabilitées comprises entre 0 et 1 équitablement 
+    réparties selon le nombre de fois qu'une personne est passée en présentateur */
+
+var tirage = Math.random();
+console.log(tirage);
+var indexTire = -1;
+var accumulateur = 0;
+resultMapping.forEach((element, index)=>{
+    accumulateur += element;
+    if(tirage < accumulateur && indexTire == -1)
+    {
+        indexTire = index;
+    }
+});
+
+var personneTiree = personnes[indexTire];
+
+console.log(personneTiree);
