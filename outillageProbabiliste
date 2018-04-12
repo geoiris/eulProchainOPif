@@ -1,0 +1,53 @@
+var personnes = [
+	{
+		"nom": "Jerome Lestoquoy",
+		"nombreDeFoisPrésentateur": 2
+	},
+	{
+		"nom": "Rémi Boussu",
+		"nombreDeFoisPrésentateur": 2
+	},
+	{
+		"nom": "Geoffrey Gourlez",
+		"nombreDeFoisPrésentateur": 2
+	},
+	{
+		"nom": "Remy Bourdoncle",
+		"nombreDeFoisPrésentateur": 1
+	}
+];
+
+function réductionParAddition(accumulateur, element)
+{
+	return accumulateur + element;
+}
+
+function réductionParMultiplication(accumulateur, element)
+{
+	return accumulateur * element;
+}
+
+var passages = personnes.map((element) => element.nombreDeFoisPrésentateur);
+var totalMultiplié = passages.reduce(réductionParMultiplication);
+var passagesProbas = passages.map((element) => totalMultiplié/element);
+var totalRange = passagesProbas.reduce(réductionParAddition);
+var resultMapping = passagesProbas.map((element) => element/totalRange);
+
+/* ResultMapping contient un tableau de probabilitées comprises entre 0 et 1 équitablement 
+    réparties selon le nombre de fois qu'une personne est passée en présentateur */
+
+var tirage = Math.random();
+console.log(tirage);
+var indexTire = -1;
+var accumulateur = 0;
+resultMapping.forEach((element, index)=>{
+    accumulateur += element;
+    if(tirage < accumulateur && indexTire == -1)
+    {
+        indexTire = index;
+    }
+});
+
+var personneTiree = personnes[indexTire];
+
+console.log(personneTiree);
