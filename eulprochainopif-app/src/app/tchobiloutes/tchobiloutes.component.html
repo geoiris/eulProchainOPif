@@ -1,0 +1,8 @@
+<h2>Chalu les biloutes</h2>
+<ul class="heroes">
+  <li *ngFor="let biloute of tchobiloutes" (click)="onSelect(biloute)" [class.selected]="biloute===selectedTchobiloute">
+    <span class="badge">{{biloute.id}}</span> {{biloute.name}}
+  </li>
+</ul>
+
+<app-tchobiloute-detail [tchobiloute]="selectedTchobiloute"></app-tchobiloute-detail>
